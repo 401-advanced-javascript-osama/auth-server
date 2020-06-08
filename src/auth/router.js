@@ -39,7 +39,6 @@ async function listHandler (req,res){
 
 
 router.get('/oauth', oauth, (req, res) => {
-  console.log('lllllllllllll');
   
   res.json({ token: req.token });
 });

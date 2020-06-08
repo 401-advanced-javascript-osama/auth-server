@@ -13,7 +13,6 @@ module.exports = async (req, res, next) => {
     const code = req.query.code;
 
     const remoteToken = await exchangeCodeForToken(code);
-    // console.log('remoteToken',remoteToken);
     
     const remoteUser = await getRemoteUserInfo(remoteToken);
     const [user, token] = await getUser(remoteUser);
@@ -52,7 +51,6 @@ async function getUser(remoteUser) {
     password: 'anysting', 
   };
   const user = await users.save(userRecord);
-  console.log('user',user);
   
   const token = users.generateToken(user);
   return [user, token];
