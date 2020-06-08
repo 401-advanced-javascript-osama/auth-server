@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const router = require('./auth/router.js');
 const morgan = require('morgan');
+// const oauth = require('./auth/middleware/oauth.js');
 const app = express();
-
+app.use(express.static('./public'));
 const notFoundHandler = require('./middleware/404.js');
 const errorHandler = require('./middleware/500.js');
 // app.use('/docs', express.static('./docs'));
@@ -11,6 +12,7 @@ const errorHandler = require('./middleware/500.js');
 app.use(express.json());
 
 app.use(morgan('dev'));
+
 
 
 app.use('/', router);
