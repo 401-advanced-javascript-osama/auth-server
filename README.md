@@ -5,7 +5,7 @@ In this, the second phase of the Authentication Server build, we’ll be adding 
 ### Author: Osama Mousa
 ### Links and Resources
 
-- [submission PR class-12](https://github.com/401-advanced-javascript-osama/api-server/pull/8)
+- [submission PR class-12](https://github.com/401-advanced-javascript-osama/auth-server/pull/2)
 
 
 ### Modules
