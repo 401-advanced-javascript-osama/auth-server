@@ -32,8 +32,27 @@ class Users extends Model {
 
   }
   generateToken(user){
-    const token = jwt.sign({ username: user.username }, SECRET);
+    // const token = jwt.sign({ username: user.username }, SECRET);
+    const token =  jwt.sign({
+      exp: Math.floor(Date.now() / 1000) + (15 * 60),
+      algorithm:  'RS384',
+      username: user.username,
+    }, SECRET);
+
     return token;
+  }
+  async authenticateToken  (token) {
+    try {
+      const tokenObject = await jwt.verify(token, SECRET);
+      const result = await this.get({username : tokenObject.username});
+      if (result.length != 0) {
+        return Promise.resolve(result[0]);
+      } else {
+        return Promise.reject('User is not found!');
+      }
+    } catch (e) {
+      return Promise.reject(e.message);
+    }
   }
 }
 

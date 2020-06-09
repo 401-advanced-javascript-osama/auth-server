@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const router = require('./auth/router.js');
+const extra_router = require('./auth/extra-routes.js');
 const morgan = require('morgan');
 // const oauth = require('./auth/middleware/oauth.js');
 const app = express();
@@ -13,7 +14,7 @@ app.use(express.json());
 
 app.use(morgan('dev'));
 
-
+app.use('/', extra_router);
 
 app.use('/', router);
 
