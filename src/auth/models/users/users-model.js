@@ -11,16 +11,25 @@ const SECRET = process.env.SECRET || 'mysecret';
 * @constructor Products
 */
 
+const roles = {
+  user : ['read'],
+  writer : ['read' , 'create'],
+  editor : ['read' , 'create' ,'change'],
+  admin : ['read','create' ,'update','delete'],
+};
+
 class Users extends Model {
   constructor() {
     super(schema);
   }
   async save(record){
     const result = await this.get({username : record.username});
+    console.log('result', result);
 
     if(result.length == 0){
-      record.password = await bcryptjs.hash(record.password, 5);
       const user = await this.create(record);
+      console.log('userr', user);
+      
       return user;
     }
     
@@ -32,26 +41,34 @@ class Users extends Model {
 
   }
   generateToken(user){
-    // const token = jwt.sign({ username: user.username }, SECRET);
     const token =  jwt.sign({
       exp: Math.floor(Date.now() / 1000) + (15 * 60),
       algorithm:  'RS384',
       username: user.username,
+      capabilities : roles[user.role],
     }, SECRET);
-
     return token;
   }
+
   async authenticateToken  (token) {
     try {
       const tokenObject = await jwt.verify(token, SECRET);
       const result = await this.get({username : tokenObject.username});
       if (result.length != 0) {
-        return Promise.resolve(result[0]);
+        return Promise.resolve(tokenObject);
       } else {
         return Promise.reject('User is not found!');
       }
     } catch (e) {
       return Promise.reject(e.message);
+    }
+  }
+  can(permision){
+    if(permision){
+
+      return Promise.resolve(true);
+    }else{
+      return Promise.reject(false);
     }
   }
 }

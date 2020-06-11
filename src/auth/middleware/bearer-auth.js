@@ -9,7 +9,10 @@ module.exports = (req, res, next) => {
       users
         .authenticateToken(token)
         .then((validUser) => {
-          req.user = validUser;
+          req.user = {
+            username : validUser.username,
+            capabilities : validUser.capabilities,
+          };
           next();
         })
         .catch((e) => next('Invalid login', e.message));

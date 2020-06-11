@@ -23,7 +23,7 @@ app.use('/', router);
 
 app.use('*', notFoundHandler);
 
-app.use(errorHandler);
+// app.use(errorHandler);
 
 module.exports = {
   server: app,

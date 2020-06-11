@@ -22,6 +22,8 @@ async function saveHandler (req,res){
     const token = users.generateToken(user);
     res.json({ token });
   }catch(err){
+    console.error(err);
+    
     res.status(403).send('user already exists');
   }
     

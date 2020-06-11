@@ -5,7 +5,7 @@ n this phase, the new requirement is that any user with a valid token (retrieved
 ### Author: Osama Mousa
 ### Links and Resources
 
-- [submission PR class-12](https://github.com/401-advanced-javascript-osama/auth-server/pull/3)
+- [submission PR class-12](https://github.com/401-advanced-javascript-osama/auth-server/pull/4)
 
 
 ### Modules
@@ -16,6 +16,11 @@ n this phase, the new requirement is that any user with a valid token (retrieved
 #### How to initialize/run your application
 
 - sign up then copy the token after that chose the bearer authorization from the header and past it thier then send you will get the user info
+- after sign in copy the token and set it to the header `bearer authrization` and hit these routs :
+    - http://localhost:3000/create
+    - http://localhost:3000/update
+    - http://localhost:3000/delete
+    - http://localhost:3000/read
 
 
 #### Tests
@@ -24,4 +29,4 @@ n this phase, the new requirement is that any user with a valid token (retrieved
 
 #### UML
 
-![UML-Diagram](./uml/bearer-token.png)
+![UML-Diagram](./uml/acl.png)
