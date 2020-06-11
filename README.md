@@ -30,3 +30,4 @@ n this phase, the new requirement is that any user with a valid token (retrieved
 #### UML
 
 ![UML-Diagram](./uml/acl.png)
+![UML-lab-11](./uml/lab.png)
